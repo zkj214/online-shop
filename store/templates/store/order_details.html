@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <div  class="row">
+    <div class="col-md-4">
+    <h5>CUSTOMERS</h5>
+        <hr>
+        <div class="card card-body">
+            <div style="text-align:center;" class="bg-primary text-white p-1">Customers</div>
+            <table class="table">
+            <tr>
+                <th></th>
+                <th>Customer</th>
+                <th>Transaction ID</th>
+            </tr>
+                {% for order in orders %}
+                <tr>
+                    <td></td>
+                    <td>{{ order.customer.name }}</td>
+                    <td><a style="text-decoration:none;" href="{% url 'store:order_details' pk=order.pk %}" class="transaction-id">{{ order.transaction_id }}</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h5 class="top-5">LAST 5 ORDERS</h5>
+        <hr>
+        <div class="card card-body">
+            <div style="text-align:center;" class="bg-primary text-white p-1">Order Details</div>
+            <table class="table">
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Date Ordered</th>
+                <td colspan="2"><a style="width:100%;" class="btn btn-sm btn-danger" href="{% url 'store:delete_order' pk=order.pk %}">Delete</a></td>
+                <th></th>
+            </tr>
+
+            {% for item in items %}
+            <tr class="order-details" id="details">
+                <td>{{item.product.name}}</td>
+                <td>{{item.quantity}}</td>
+                 <td>{{item.date_added}}</td>
+                 <td colspan="2"></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td><b>Status:</b></td>
+                <td> {{ order.status }}</td>
+             <td></td>
+             <td colspan="2"><a style="width:100%;" class="btn btn-sm btn-info" href="{% url 'store:order_update' pk=order.pk %}">Update</a></td>
+                <td></td>
+            </tr>
+            </table>
+        </div>
+    </div>
+    </div>
+    <br>
+
+    <div class="row">
+     <h5>STATS</h5>
+         <hr>
+        <div class="col-md-4">
+
+                <div class="card text-center text-white mb-3" id="total-orders">
+                    <div class="card-header">
+                        <h5 class="card-title">Total Orders</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ count_orders }}</h5>
+                    </div>
+                </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+                <div class="card text-center text-white mb-3" id="orders-delivered">
+                    <div class="card-header">
+                        <h5 class="card-title">Orders Delivered</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ orders_delivered }}</h5>
+                    </div>
+                </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+                <div class="card text-center text-white mb-3" id="orders-pending">
+                    <div class="card-header">
+                        <h5 class="card-title">Orders Pending</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ orders_pending }}</h5>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <h5>PRODUCTS</h5>
+        <hr>
+        {% if count >= 1 %}
+            {% for product in products %}
+                {% if product.stocks >= 1 %}
+            <div class="col-md-4" style="margin-bottom:20px;">
+                <img class="thumbnail" src="{{ product.imageURL }}">
+                <div class="box-element product">
+                <h5><strong>{{ product.name }}</strong></h5>
+                    <hr>
+                    {% if product.stocks <= 3 %}
+                    <small style="color:red;display:inline-block;margin-top:-15px;margin-bottom: 15px;">Stocks: {{ product.stocks }}</small>
+                    {% else %}
+                    <small style="color:grey;display:inline-block;margin-top:-15px;margin-bottom: 15px;">Stocks: {{ product.stocks }}</small>
+                    {% endif %}
+                    <small style="float: right;color:grey;display:inline-block;margin-top:-15px;margin-bottom: 15px;">Sales: {{ product.sales }}</small>
+                    <br>
+                    <a  href="{% url 'store:update_product' pk=product.pk %}" class="btn btn-outline-primary">Update</a>
+                    <a class="btn btn-outline-danger" href="{% url 'store:delete_product'  pk=product.pk %}">Delete</a>
+                    <h4 style="float: right; display:inline-block">${{ product.price }}</h4>
+                </div>
+            </div>
+                {% endif %}
+            {% endfor %}
+            {% else %}
+            <p>No products available at this time. </p>
+        {% endif %}
+    </div>
+    <br>
+    <nav aria-label="Page navigation example">
+    {% if count %}
+        <ul class="pagination justify-content-center">
+        {% if products.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a></li>
+         {% endif %}
+
+        {% for n in nums %}
+            {% if products.number == forloop.counter %}
+            <li class="page-item"><a style="background:#2E2E2E;color: white;" class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                {% else %}
+               <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if products.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last &raquo;</a></li>
+        {% endif %}
+        </ul>
+    {% endif %}
+    </nav>
+{% endblock %}

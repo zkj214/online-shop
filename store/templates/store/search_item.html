@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+
+
+{% block content %}
+    {% if keyword %}
+        <h2>You search for {{ keyword }}</h2>
+
+        {% if count > 1 %}
+        <h5>{{ count }} items found.</h5>
+        {% elif count == 0 %}
+            <h5>No item found.</h5>
+        {% else %}
+         <h5>1 item found.</h5>
+        {% endif %}
+    {% else %}
+        <h3>
+        Please enter an item on the search box to find it in the store.
+        </h3>
+    {% endif %}
+    <br>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4" style="margin-bottom:20px;">
+            <img class="thumbnail" src="{{ product.imageURL }}">
+            <div class="box-element product">
+            <h5><strong>{{ product.name }}</strong></h5>
+                <hr>
+                {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                           {% if product.stocks <= 3 %}
+                                <small style="color:red;display:inline-block;margin-top:-15px;margin-bottom: 15px;">Stocks: {{ product.stocks }}</small>
+                            {% else %}
+                                <small style="color:grey;display:inline-block;margin-top:-15px;margin-bottom: 15px;">Stocks: {{ product.stocks }}</small>
+                            {% endif %}
+                           <small style="float: right;color:grey;display:inline-block;margin-top:-15px;margin-bottom: 15px;">Sales: {{ product.sales }}</small>
+                            <br>
+                           <a href="#" class="btn btn-outline-primary">Update</a>
+                           <a class="btn btn-outline-danger" href="#">Delete</a>
+                        {% else %}
+                            <button data-product="{{ product.pk }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add To Cart</button>
+                        {% endif %}
+                {% else %}
+                    <a  href="{% url 'accounts:redirect' %}" class="btn btn-outline-secondary">Add To Cart</a>
+                {% endif %}
+                {% if not user.is_staff %}
+                <a class="btn btn-outline-success" href="{% url 'store:product_details' pk=product.pk %}">View</a>
+                {% endif %}
+                <h4 style="float: right; display:inline-block">${{ product.price }}</h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+
+    <nav aria-label="Page navigation example">
+    {% if count %}
+        <ul class="pagination justify-content-center">
+        {% if products.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a></li>
+         {% endif %}
+
+
+            {% for n in nums %}
+                {% if products.number == forloop.counter %}
+                <li class="page-item"><a style="background:#2E2E2E;color: white;" class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                    {% else %}
+                   <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+        {% if products.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last &raquo;</a></li>
+        {% endif %}
+        </ul>
+    {% endif %}
+    </nav>
+{% endblock %}

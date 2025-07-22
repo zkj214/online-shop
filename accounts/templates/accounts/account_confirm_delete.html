@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Account{% endblock %}
+
+{% block content %}
+    <div class="jumbotron my-4 p-4 text-white rounded bg-secondary">
+        <p>Are you sure you want to delete your account?</p>
+
+<form action="{% url 'accounts:delete' pk=user.pk %}" method="POST">
+    {% csrf_token %}
+    <button class="btn btn-danger">Yes</button>
+    <a class="btn btn-secondary" href="{% url 'accounts:settings' %}">Cancel</a>
+</form>
+    </div>
+{% endblock %}

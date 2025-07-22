@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap5 %} <!-- pip install django-bootstrap-v5 -->
+{% block title %}Update Product{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+        <form action="{% url 'store:update_product' pk=product.pk %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-primary">Update Product</button>
+            <a href="{% url 'store:admin_dashboard' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title%}Product Details{% endblock %}
+
+{% block content %}
+<div class="row">
+    <center>
+    <div class="col-md-6">
+        <div class="card card-body">
+        <h3>{{ product.name }}</h3>
+        <img src="{{ product.image.url }}">
+        <br>
+            <hr>
+         <p>{{product.description}}</p>
+         </div>
+        <br>
+        {% if user.is_authenticated %}
+                <button data-product="{{ product.pk }}" data-action="add" class="btn btn-secondary add-btn update-cart">Add To Cart</button>
+                {% else %}
+                <a  href="{% url 'accounts:redirect' %}" class="btn btn-secondary">Add To Cart</a>
+         {% endif %}
+         <a href="{% url 'store:items' %}" class="btn btn-secondary">Back</a>
+    </div>
+        </center>
+</div>
+{% endblock %}

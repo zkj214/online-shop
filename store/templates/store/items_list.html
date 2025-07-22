@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Products{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <div class="row">
+        {% if count >= 1 %}
+            {% for product in products %}
+                {% if product.stocks >= 1 %}
+            <div class="col-md-4" style="margin-bottom:20px;">
+                <img class="thumbnail" src="{{ product.imageURL }}">
+                <div class="box-element product">
+                <h5><strong>{{ product.name }}</strong></h5>
+                    <hr>
+                    {% if user.is_authenticated %}
+                    <button data-product="{{ product.pk }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add To Cart</button>
+                    {% else %}
+                    <a  href="{% url 'accounts:redirect' %}" class="btn btn-outline-secondary">Add To Cart</a>
+                    {% endif %}
+                    <a class="btn btn-outline-success" href="{% url 'store:product_details'  pk=product.pk %}">View</a>
+                    <h4 style="float: right; display:inline-block">${{ product.price }}</h4>
+                </div>
+            </div>
+                {% endif %}
+            {% endfor %}
+            {% else %}
+            <p>No products available at this time. </p>
+        {% endif %}
+    </div>
+    <br>
+    <nav aria-label="Page navigation example">
+    {% if count %}
+        <ul class="pagination justify-content-center">
+        {% if products.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a></li>
+         {% endif %}
+
+        {% for n in nums %}
+            {% if products.number == forloop.counter %}
+            <li class="page-item"><a style="background:#2E2E2E;color: white;" class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                {% else %}
+               <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if products.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last &raquo;</a></li>
+        {% endif %}
+        </ul>
+    {% endif %}
+    </nav>
+{% endblock %}

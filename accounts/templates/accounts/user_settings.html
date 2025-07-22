@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{%  load bootstrap5 %}
+
+{% block content %}
+    <div class="row">
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+            {{ message }}
+            </div>
+        {% endfor %}
+    <br>
+    <div class="col-md-3">
+        <div class="card card-body">
+            {% if user.is_staff %}
+            <a class="btn btn-secondary" href="{% url 'store:admin_dashboard' %}">Back To Homepage</a>
+            {% else %}
+            <a class="btn btn-secondary" href="{% url 'store:items' %}">Back To Homepage</a>
+            {% endif %}
+
+            <hr>
+            <h3 style="text-align:center;">Account Settings</h3>
+            <hr>
+            <img class="profile-pic" src="{{ user.customer.imageURL }}">
+            <form action="{% url 'accounts:upload_pic' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form2.as_p }}
+              <button style="width:100%;" class="btn btn-secondary">Upload Photo</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-body">
+            <div class="col-md-7">
+            <form action="{% url 'accounts:settings' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <br>
+                <button class="btn btn-info">Update Info</button>
+                {% if not user.is_staff %}
+                <a class="btn btn-warning" href="{% url 'accounts:delete' pk=user.pk %}">Delete Account</a>
+                {% endif %}
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

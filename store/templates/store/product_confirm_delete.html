@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Product{% endblock %}
+
+{% block content %}
+<div class="jumbotron my-4 p-4 text-white rounded bg-secondary">
+<p>Are you sure you want to delete {{ product }}?</p>
+
+<form action="{% url 'store:delete_product' pk=product.pk %}" method="POST">
+    {% csrf_token %}
+    <button class="btn btn-danger">Yes</button> &nbsp;
+    <a class="btn btn-secondary" href="{% url 'store:admin_dashboard' %}">Cancel</a>
+</form>
+</div>
+{% endblock %}
