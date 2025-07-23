@@ -19,30 +19,30 @@ import os
 
 User=get_user_model()
 def login_user(request):
-    year = date.today().year
     if request.user.is_authenticated:
         if request.user.is_staff:
             return redirect("store:admin_dashboard")
+        return redirect("store:dashboard")
 
-        return redirect("store:items")
-    else:
-        if request.method=="POST":
-            email=request.POST.get("email")
-            password = request.POST.get("password")
+    year = date.today().year
 
-            user = authenticate(username=email,password=password)
-            if user is not None:
-                login(request,user)
-                customer=Customer.objects.get(user=user)
-                name=customer.name.split()[0]
-                messages.success(request,f"You have been successfully logged in, {name}!")
-                if request.user.is_staff:
-                    return redirect("store:admin_dashboard")
-                else:
-                    return redirect("store:items")
+    if request.method=="POST":
+        email=request.POST.get("email")
+        password = request.POST.get("password")
+
+        user = authenticate(username=email,password=password)
+        if user is not None:
+            login(request,user)
+            customer=Customer.objects.get(user=user)
+            name=customer.name.split()[0]
+            messages.success(request,f"You have been successfully logged in, {name}!")
+            if request.user.is_staff:
+                return redirect("store:admin_dashboard")
             else:
-                messages.error(request,"Oops, wrong username or password.")
-                return redirect("accounts:login")
+                return redirect("store:items")
+        else:
+            messages.error(request,"Oops, wrong username or password.")
+            return redirect("accounts:login")
 
     context={"year":year}
     return render(request,"accounts/login.html",context)
