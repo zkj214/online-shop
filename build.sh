@@ -12,4 +12,4 @@ python manage.py migrate
 #  python manage.py createsuperuser --no-input
 #fi
 
-python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput #reqired
