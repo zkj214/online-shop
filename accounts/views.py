@@ -71,7 +71,7 @@ def register_user(request):
                 customer.user=user #so that there would be a 1-to-1 relationship bet. user & customer
                 customer.email=user.email
 
-                if user.pk>1:
+                if user.id>1:
                     group,created=Group.objects.get_or_create(name="customer")
                     user.groups.add(group)
                 else:
