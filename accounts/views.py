@@ -41,7 +41,7 @@ def login_user(request):
                 else:
                     return redirect("store:items")
             else:
-                messages.error(request,"Oops,wrong username or password.")
+                messages.error(request,"Oops, wrong username or password.")
                 return redirect("accounts:login")
 
     context={"year":year}
