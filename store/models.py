@@ -49,7 +49,8 @@ class Order(models.Model):
     CATEGORY=(
         ("Open","Open"),
         ("Complete","Complete"),
-        ("Shipped Out","Shipped Out")
+        ("Shipped Out","Shipped Out"),
+        ("Cancelled","Cancelled")
     )
     customer=models.ForeignKey(Customer,on_delete=models.SET_NULL,blank=True,null=True)
     status=models.CharField(default="Open",max_length=100,choices=CATEGORY)

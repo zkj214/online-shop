@@ -20,5 +20,6 @@ urlpatterns=[
     path("order_details/<int:pk>/",order_details,name="order_details"),
     path("order_update/<int:pk>/",order_update,name="order_update"),
     path("save_order/<int:pk>/",save_order,name="save_order"),
+    path("cancel_order/<int:pk>/",cancel_order,name="cancel_order"),
     path("delete_order/<int:pk>/",delete_order,name="delete_order")
 ]

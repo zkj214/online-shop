@@ -302,12 +302,30 @@ def save_order(request,pk):
 
 @login_required
 @admin_only
+def cancel_order(request,pk):
+    order=Order.objects.get(pk=pk)
+    cartitems=order.cartitem_set.all()
+
+    for item in cartitems:
+        product_pk=item.product.pk
+        product=Product.objects.get(pk=product_pk)
+        product.stocks=product.stocks + item.quantity
+        product.sales=product.sales - item.quantity
+
+    order.status="Cancelled"
+    order.save()
+    return redirect("store:admin_dashboard")
+
+
+@login_required
+@authorized_user(allowed_roles=["customer"])
 def delete_order(request,pk):
     order=Order.objects.get(pk=pk)
     cartitem=CartItem.objects.filter(order__pk=pk)
+
     cartitem.delete()
     order.delete()
-    return redirect("store:admin_dashboard")
+    return redirect("store:dashboard")
 
 
 @login_required

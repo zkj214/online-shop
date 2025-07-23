@@ -66,7 +66,9 @@
                     <td>{{ item.order.transaction_id }}</td>
 					<td>{{item.order.status}}</td>
 					<!--<td><a class="btn btn-sm btn-info" href="#">Update</a></td>-->
-                    <!--<td><a class="btn btn-sm btn-danger" href="{% url 'store:delete_order' pk=item.order.pk %}">Cancel</a></td>-->
+                    {% if item.order.status == "Shipped Out" or item.order.status == "Cancelled" %}
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'store:delete_order' pk=item.order.pk %}">Delete</a></td>
+                    {% endif %}
 				</tr>
 				{% endfor %}
 			</table>

@@ -42,7 +42,7 @@
                 <th>Product</th>
                 <th>Qty</th>
                 <th>Date Ordered</th>
-                <td colspan="2"><a style="width:100%;" class="btn btn-sm btn-danger" href="{% url 'store:delete_order' pk=order.pk %}">Delete</a></td>
+                <td colspan="2"><a style="width:100%;" class="btn btn-sm btn-danger" href="{% url 'store:cancel_order' pk=order.pk %}">Cancel Order</a></td>
                 <th></th>
             </tr>
 
