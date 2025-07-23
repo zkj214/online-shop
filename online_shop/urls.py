@@ -24,8 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("store.urls",namespace="store")),
     path("accounts/",include("accounts.urls",namespace="accounts")),
-    path('accounts/', include('django.contrib.auth.urls')), #required when dealing with reset password emails
-    re_path(r'^static/(?P<path>.*)$', serve, {'document_root':settings.STATIC_ROOT})
+    path('accounts/', include('django.contrib.auth.urls')) #required when dealing with reset password emails
 ]
 
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
