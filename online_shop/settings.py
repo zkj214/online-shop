@@ -29,7 +29,7 @@ MEDIA_DIR=os.path.join(BASE_DIR,"media")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -126,9 +126,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS=[STATIC_DIR]
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #required on render
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #required
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #required on render
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #required
 
 MEDIA_URL="/media/"
 MEDIA_ROOT=MEDIA_DIR
