@@ -38,8 +38,8 @@ def login_user(request):
             messages.success(request,f"You have been successfully logged in, {name}!")
             if request.user.is_staff:
                 return redirect("store:admin_dashboard")
-            else:
-                return redirect("store:items")
+
+            return redirect("store:items")
         else:
             messages.error(request,"Oops, wrong username or password.")
             return redirect("accounts:login")
