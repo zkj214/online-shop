@@ -17,14 +17,14 @@
       {% endif %}
 
       {% if user.is_authenticated %}
-
+          {% if not user.is_staff %}
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'store:items' %}">Home</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'store:dashboard' %}">Dashboard</a>
             </li>
-
+          {% endif %}
       {% else %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'store:items' %}">View Products</a>
