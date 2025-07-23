@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["shoppers-cy7n.onrender.com"]
+ALLOWED_HOSTS = ["shoppers-ufgt.onrender.com"]
 
 
 # Application definition
