@@ -14,7 +14,7 @@
 			<h5>Customer: {{ customer.name }}</h5>
 			<hr>
             <center>
-            <img style="align-items:center;" class="profile-pic" src="{{ user.customer.imageURL }}">
+            <img style="align-items:center;" class="profile-pic" src="{{ customer.imageURL }}">
             </center>
 			<a class="btn btn-outline-info  btn-sm btn-block mt-3" href="{% url 'accounts:settings' %}">Update Details</a>
 			<!--<a class="btn btn-outline-danger  btn-sm btn-block" href="#">Delete Customer</a>-->
