@@ -154,7 +154,7 @@ AWS_DEFAULT_ACL = None #required
 
     # when storing Media Files
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
 
     # Static Files
 #STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' #required
