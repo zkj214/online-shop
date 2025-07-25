@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [] #"shoppers-foke.onrender.com
+ALLOWED_HOSTS = ["shoppers-kkk6.onrender.com"]
 
 
 # Application definition
@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'online_shop.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default':dj_database_url.parse("DB_URL")
+    'default':dj_database_url.parse(os.environ.get("DB_URL"))
 }
 
 
