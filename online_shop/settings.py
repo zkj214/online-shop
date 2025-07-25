@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["shoppers-foke.onrender.com"]
+ALLOWED_HOSTS = [] #"shoppers-foke.onrender.com
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "bootstrap5",
+    "storages",
     'store',
     'accounts'
 ]
@@ -83,7 +84,7 @@ WSGI_APPLICATION = 'online_shop.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default':dj_database_url.parse(os.environ.get("DB_URL"))
+    'default':dj_database_url.parse("DB_URL")
 }
 
 
@@ -127,7 +128,7 @@ STATICFILES_DIRS=[STATIC_DIR]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #required on render
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #required
 
-MEDIA_URL="/media/"
+#MEDIA_URL="/media/"
 MEDIA_ROOT=MEDIA_DIR
 
 LOGIN_URL="/"
@@ -138,9 +139,26 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "alhaj.ziebhar214@gmail.com"
-EMAIL_HOST_PASSWORD = "bosk lnix mrze oqxw "   #must be app password
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")  #must be app password
 
+# AWS S3 Configuration
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com' #don't include in render environment variables
+
+AWS_S3_FILE_OVERWRITE = False  # Prevents overwriting files with the same name
+AWS_DEFAULT_ACL = None #required
+
+    # Media Files
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
+    # Static Files
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' #required
+#STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
