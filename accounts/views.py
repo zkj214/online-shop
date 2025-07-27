@@ -187,7 +187,6 @@ def upload_photo(request):
         form=ImageUploadForm(request.POST,request.FILES,instance=customerData)
         if form.is_valid:
             try:
-                customerData.profile_pic.delete()
                 customer = form.save(commit=False)
             except ValueError:
                 customerData.profile_pic="profile2.png"
@@ -196,6 +195,7 @@ def upload_photo(request):
 
 
             if "profile_pic" in request.FILES:
+                customerData.profile_pic.delete()
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
                 customerData.profile_pic = "profile2.png"
