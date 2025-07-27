@@ -147,8 +147,15 @@ def delete_account(request,pk):
         user.delete()
         cartitem.delete()
 
+        img_file=str(customer.profile_pic) # must be string type
+        file_path=os.path.join(settings.MEDIA_ROOT,img_file)
 
-        customer.profile_pic.delete()
+        try:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        except PermissionError:
+            customer.profile_pic.delete()
+
         customer.delete()
         logout(request)  # must log out
         messages.info(request,"Your account has been deleted.")
