@@ -190,8 +190,12 @@ def upload_photo(request):
         if form.is_valid:
             try:
                 customer = form.save(commit=False)
-                if os.path.exists(file_path):
-                    os.remove(file_path)
+                try:
+                    if os.path.exists(file_path):
+                        os.remove(file_path)
+                except PermissionError:
+                    pass
+
             except ValueError:
                 customerData.profile_pic="profile2.png"
                 messages.error(request, "Sorry, unaccepted file type. Please try again.")
