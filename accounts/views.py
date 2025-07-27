@@ -195,10 +195,10 @@ def upload_photo(request):
                 messages.error(request, "Sorry, unaccepted file type. Please try again.")
                 return redirect("accounts:settings")
 
+            if os.path.exists(file_path):
+                os.remove(file_path)
 
             if "profile_pic" in request.FILES:
-                if os.path.exists(file_path):
-                    os.remove(file_path)
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
                 customerData.profile_pic = "profile2.png"
