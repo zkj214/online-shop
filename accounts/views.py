@@ -190,7 +190,7 @@ def upload_photo(request):
                 if customer.profile_pic != "profile2.png":
                     customer.profile_pic.delete()
                 else:
-                    pass
+                    customer.profile_pic = "profile2.png"
                 customer = form.save(commit=False)
             except ValueError:
                 customer.profile_pic="profile2.png"
@@ -200,7 +200,6 @@ def upload_photo(request):
             if "profile_pic" in request.FILES:
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
-                customer.profile_pic = "profile2.png"
                 messages.error(request, "You didn't upload a photo. Please try again.")
                 return redirect("accounts:settings")
 
