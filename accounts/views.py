@@ -198,6 +198,7 @@ def upload_photo(request):
             if "profile_pic" in request.FILES:
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
+                customerData.profile_pic = "profile2.png"
                 messages.error(request, "You didn't upload a photo. Please try again.")
                 return redirect("accounts:settings")
 
