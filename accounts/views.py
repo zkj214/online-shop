@@ -193,6 +193,7 @@ def upload_photo(request):
                 return redirect("accounts:settings")
 
             if "profile_pic" in request.FILES:
+                customer.profile_pic.delete()
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
                 messages.error(request, "Choose an image to upload and try again.")
