@@ -187,13 +187,13 @@ def upload_photo(request):
         form=ImageUploadForm(request.POST,request.FILES,instance=customerData)
         if form.is_valid:
             try:
+                customerData.profile_pic.delete()
                 customer = form.save(commit=False)
             except ValueError:
                 messages.error(request, "Sorry, unaccepted file type. Please try again.")
                 return redirect("accounts:settings")
 
             if "profile_pic" in request.FILES:
-                customerData.profile_pic.delete()
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
                 messages.error(request, "You didn't upload a photo. Please try again.")
