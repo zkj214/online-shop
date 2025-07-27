@@ -199,6 +199,10 @@ def upload_photo(request):
 
             if "profile_pic" in request.FILES:
                 customer.profile_pic=request.FILES["profile_pic"]
+            else:
+                customer.profile_pic = "profile2.png"
+                messages.error(request, "You didn't upload a photo. Please try again.")
+                return redirect("accounts:settings")
 
             customer.save()
             messages.success(request,"Your photo has been successfully updated.")
@@ -207,7 +211,3 @@ def upload_photo(request):
                 return redirect("store:admin_dashboard")
             else:
                 return redirect("store:dashboard")
-        else:
-            customer.profile_pic = "profile2.png"
-            messages.error(request, "You didn't upload a photo. Please try again.")
-            return redirect("accounts:settings")
