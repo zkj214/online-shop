@@ -195,7 +195,6 @@ def upload_photo(request):
 
 
             if "profile_pic" in request.FILES:
-                customerData.profile_pic.delete()
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
                 customerData.profile_pic = "profile2.png"
