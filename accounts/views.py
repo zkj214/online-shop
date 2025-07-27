@@ -156,7 +156,6 @@ def delete_account(request,pk):
         except PermissionError:
             pass
 
-        customer.profile_pic.delete()
         customer.delete()
         logout(request)  # must log out
         messages.info(request,"Your account has been deleted.")
