@@ -1,11 +1,8 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
-from django.urls import reverse
-
 from accounts.decorators import authorized_user
 from accounts.forms import CreateUserForm, ImageUploadForm, RegisterCustomerForm
 from django.contrib.auth.models import Group
