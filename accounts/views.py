@@ -198,7 +198,7 @@ def upload_photo(request):
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
                 customerData.profile_pic = "profile2.png"
-                messages.error(request, "You didn't upload a photo. Please try again.")
+                messages.error(request, "Choose an image to upload and try again.")
                 return redirect("accounts:settings")
 
             customer.save()
