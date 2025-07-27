@@ -186,16 +186,16 @@ def upload_photo(request):
     file_path = os.path.join(settings.MEDIA_ROOT, img_file)
 
     if request.method=="POST":
+        try:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        except PermissionError:
+            pass
+
         form=ImageUploadForm(request.POST,request.FILES,instance=customerData)
         if form.is_valid:
             try:
                 customer = form.save(commit=False)
-                try:
-                    if os.path.exists(file_path):
-                        os.remove(file_path)
-                except PermissionError:
-                    pass
-
             except ValueError:
                 customerData.profile_pic="profile2.png"
                 messages.error(request, "Sorry, unaccepted file type. Please try again.")
