@@ -182,6 +182,11 @@ def delete_account(request,pk):
 @login_required
 def upload_photo(request):
     customerData=Customer.objects.get(user=request.user)
+    img_file = str(customerData.profile_pic)  # must be string type
+    file_path = os.path.join(settings.MEDIA_ROOT, img_file)
+
+    if os.path.exists(file_path):
+        os.remove(file_path)
 
     if request.method=="POST":
         form=ImageUploadForm(request.POST,request.FILES,instance=customerData)
@@ -193,8 +198,6 @@ def upload_photo(request):
                 messages.error(request, "Sorry, unaccepted file type. Please try again.")
                 return redirect("accounts:settings")
 
-            if customerData.profile_pic:
-                customerData.profile_pic.delete()
 
             if "profile_pic" in request.FILES:
                 customer.profile_pic=request.FILES["profile_pic"]
