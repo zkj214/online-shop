@@ -185,9 +185,6 @@ def upload_photo(request):
     img_file = str(customerData.profile_pic)  # must be string type
     file_path = os.path.join(settings.MEDIA_ROOT, img_file)
 
-    if os.path.exists(file_path):
-        os.remove(file_path)
-
     if request.method=="POST":
         form=ImageUploadForm(request.POST,request.FILES,instance=customerData)
         if form.is_valid:
@@ -200,6 +197,8 @@ def upload_photo(request):
 
 
             if "profile_pic" in request.FILES:
+                if os.path.exists(file_path):
+                    os.remove(file_path)
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
                 customerData.profile_pic = "profile2.png"
