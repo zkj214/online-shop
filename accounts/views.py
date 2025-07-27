@@ -181,10 +181,10 @@ def delete_account(request,pk):
 
 @login_required
 def upload_photo(request):
-    customer=Customer.objects.get(user=request.user)
+    customerData=Customer.objects.get(user=request.user)
 
     if request.method=="POST":
-        form=ImageUploadForm(request.POST,request.FILES,instance=customer)
+        form=ImageUploadForm(request.POST,request.FILES,instance=customerData)
         if form.is_valid:
             try:
                 customer = form.save(commit=False)
@@ -193,7 +193,7 @@ def upload_photo(request):
                 return redirect("accounts:settings")
 
             if "profile_pic" in request.FILES:
-                customer.profile_pic.delete()
+                customerData.profile_pic.delete()
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
                 messages.error(request, "You didn't upload a photo. Please try again.")
