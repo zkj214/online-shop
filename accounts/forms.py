@@ -7,7 +7,6 @@ User=get_user_model()
 
 class CreateUserForm(UserCreationForm):
     password1=forms.CharField(widget=forms.TextInput)
-    password2=forms.CharField(widget=forms.TextInput)
 
     class Meta:
         model=User
