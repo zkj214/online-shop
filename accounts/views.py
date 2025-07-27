@@ -154,7 +154,8 @@ def delete_account(request,pk):
             if os.path.exists(file_path):
                 os.remove(file_path)
         except PermissionError:
-            pass
+            customer.delete()
+            logout(request)
 
         customer.delete()
         logout(request) # must log out
