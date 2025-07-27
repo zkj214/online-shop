@@ -22,7 +22,7 @@ def login_user(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
             return redirect("store:admin_dashboard")
-        return redirect("store:dashboard")
+        return redirect("store:items")
 
     year = date.today().year
 
