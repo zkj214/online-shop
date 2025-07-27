@@ -153,15 +153,11 @@ def delete_account(request,pk):
         try:
             if os.path.exists(file_path):
                 os.remove(file_path)
-                customer.delete()
-                logout(request)  # must log out
-            else:
-                customer.delete()
-                logout(request)  # must log out
         except PermissionError:
             pass
 
-
+        customer.delete()
+        logout(request)  # must log out
         messages.info(request,"Your account has been deleted.")
         return redirect("store:index")
 
