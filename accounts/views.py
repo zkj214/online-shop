@@ -211,3 +211,6 @@ def upload_photo(request):
                 return redirect("store:admin_dashboard")
             else:
                 return redirect("store:dashboard")
+        else:
+            messages.error(request, "You didn't upload a photo. Please try again.")
+            return redirect("accounts:settings")
