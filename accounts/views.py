@@ -182,29 +182,21 @@ def delete_account(request,pk):
 @login_required
 def upload_photo(request):
     customerData=Customer.objects.get(user=request.user)
-    img_file = str(customerData.profile_pic)  # must be string type
-    file_path = os.path.join(settings.MEDIA_ROOT, img_file)
 
     if request.method=="POST":
-        try:
-            if os.path.exists(file_path):
-                os.remove(file_path)
-        except PermissionError:
-            pass
-
         form=ImageUploadForm(request.POST,request.FILES,instance=customerData)
         if form.is_valid:
             try:
                 customer = form.save(commit=False)
             except ValueError:
-                customerData.profile_pic="profile2.png"
+                #customerData.profile_pic="profile2.png"
                 messages.error(request, "Sorry, unaccepted file type. Please try again.")
                 return redirect("accounts:settings")
 
             if "profile_pic" in request.FILES:
                 customer.profile_pic=request.FILES["profile_pic"]
             else:
-                customerData.profile_pic = "profile2.png"
+                #customerData.profile_pic = "profile2.png"
                 messages.error(request, "Choose an image to upload and try again.")
                 return redirect("accounts:settings")
 
