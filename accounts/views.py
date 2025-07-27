@@ -208,5 +208,6 @@ def upload_photo(request):
             else:
                 return redirect("store:dashboard")
         else:
+            customer.profile_pic = "profile2.png"
             messages.error(request, "You didn't upload a photo. Please try again.")
             return redirect("accounts:settings")
