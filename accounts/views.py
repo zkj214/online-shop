@@ -193,6 +193,7 @@ def upload_photo(request):
                     customer.profile_pic = "profile2.png"
                 customer = form.save(commit=False)
             except ValueError:
+                customer.profile_pic="profile2.png"
                 messages.error(request, "Sorry, unaccepted file type. Please try again.")
                 return redirect("accounts:settings")
 
