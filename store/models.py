@@ -7,8 +7,8 @@ class Customer(models.Model):
     user=models.OneToOneField(User,blank=True,null=True,on_delete=models.CASCADE)
     name=models.CharField(null=True,max_length=100)
     email=models.EmailField(blank=True,null=True)
-    address=models.CharField(max_length=100,null=True,blank=True)
-    phone=models.CharField(max_length=100,null=True,blank=True)
+    address=models.CharField(max_length=100,null=True)
+    phone=models.CharField(max_length=100,null=True)
     profile_pic=models.ImageField(default="profile2.png",blank=True,null=True,upload_to="profile_pics")
 
     def __str__(self):
