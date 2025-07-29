@@ -29,7 +29,7 @@ MEDIA_DIR=os.path.join(BASE_DIR,"media")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False   # production/testing stage
 
 ALLOWED_HOSTS = ["shoppers-kkk6.onrender.com"]
 
