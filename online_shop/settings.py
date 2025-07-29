@@ -125,10 +125,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS=[STATIC_DIR]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #required on render
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #required
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #required on render
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #required
 
-#MEDIA_URL="/media/"
+if DEBUG:
+    MEDIA_URL="/media/"
 MEDIA_ROOT=MEDIA_DIR
 
 LOGIN_URL="/"
