@@ -151,7 +151,7 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com' # serves as online MEDIA_URL/STATIC_URL
 
-AWS_S3_FILE_OVERWRITE = True  # Prevents overwriting files with the same name
+AWS_S3_FILE_OVERWRITE = True  # overwrite files with the same name
 AWS_DEFAULT_ACL = None #required
 
     # when storing Media Files
