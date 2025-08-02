@@ -13,7 +13,7 @@ body,
 			position: relative;
 			display: flex;
 			justify-content: center;
-			flex-direction: column;
+			flex-direction: column; /*Flex items are arranged vertically, from top to bottom.*/
 			padding: 10px;
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
