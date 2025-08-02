@@ -10,7 +10,6 @@ body,
 			margin-top: auto;
 			margin-bottom: auto;
 			background: #74cfbf;
-			position: relative;
 			display: flex;
 			justify-content: center;
 			flex-direction: column; /*Flex items are arranged vertically, from top to bottom.*/
