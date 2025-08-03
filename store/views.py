@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from store.forms import ProductForm,ItemUpdateForm
 from store.models import *
-from datetime import date
 from django.http import JsonResponse
 import json
 from datetime import datetime,date
