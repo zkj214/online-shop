@@ -156,8 +156,8 @@ def ProcessOrder(request):
         customer,created=Customer.objects.get_or_create(user=request.user)
         order,created=Order.objects.get_or_create(customer=customer,status="Open")
 
-        total=Decimal(data["user"]["total"]) # convert string to decimal type using decimal module
-        order.transaction_id=transaction_id
+        total=Decimal(data["user"]["total"]) # convert string to decimal type using decimal module so that the cartitem
+        order.transaction_id=transaction_id     # would be reset to 0 after the payment has been made
 
         if total==order.get_cart_total:
             order.status="Complete"
