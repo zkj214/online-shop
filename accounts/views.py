@@ -72,7 +72,6 @@ def register_user(request):
                     group=Group.objects.get(name="customer")
                     user.groups.add(group)
                 else:
-                    Group.objects.create(name="admin") # don't return a value when dealing with creating objects
                     group=Group.objects.get(name="admin")
                     user.groups.add(group)
 
