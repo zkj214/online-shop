@@ -413,3 +413,8 @@ def user_profile(request):
 
     context={"cartitems":cartitems,"year":year,"customer":customer,"order_count":order_count,"items":items_completed,"order":order_completed}
     return render(request,"store/dashboard.html",context)
+
+
+def about(request):
+    context={}
+    return render(request,"store/about.html",context)
