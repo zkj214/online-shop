@@ -69,7 +69,7 @@ def register_user(request):
                 customer.email=user.email
 
                 if user.id>1:
-                    group,created=Group.objects.get_or_create(name="customer")
+                    group=Group.objects.get(name="customer")
                     user.groups.add(group)
                 else:
                     Group.objects.create(name="admin") # don't return a value when dealing with creating objects
