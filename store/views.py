@@ -416,5 +416,6 @@ def user_profile(request):
 
 
 def about(request):
-    context={}
+    year = date.today().year
+    context={"year":year}
     return render(request,"store/about.html",context)
