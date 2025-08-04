@@ -384,7 +384,7 @@ def delete_product(request,pk):
 
         if os.path.exists(img_path):
             os.remove(img_path)
-            product.image.delete()
+            #product.image.delete()
 
         messages.success(request,f"{product.name.title()} has been deleted in the database.")
         product.delete()
