@@ -379,12 +379,7 @@ def delete_product(request,pk):
     product=Product.objects.get(pk=pk)
 
     if request.method=="POST":
-        file_name=str(product.image) #must be a string
-        img_path=os.path.join(settings.MEDIA_ROOT,file_name)
-
-        if os.path.exists(img_path):
-            os.remove(img_path)
-            #product.image.delete()
+        product.image.delete()
 
         messages.success(request,f"{product.name.title()} has been deleted in the database.")
         product.delete()
