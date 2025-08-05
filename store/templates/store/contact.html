@@ -8,7 +8,7 @@
         <div class="card card-body">
         <h1>Email Me</h1>
             <hr>
-         <form action="" method="POST">
+         <form action="{% url 'store:contact' %}" method="POST">
              {% csrf_token %}
              <input type="email" name="email" class="form-control" placeholder="Your email address...">
              <br>

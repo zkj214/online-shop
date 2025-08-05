@@ -427,7 +427,7 @@ def contact(request):
         myemail="alhaj.ziebhar214@gmail.com"
         app_password="hwvs havt dtnh krqr "
 
-        with smtplib.SMTP("smtp.gmail.com") as connection:
+        with smtplib.SMTP("smtp.gmail.com",port=587) as connection:
             connection.starttls()
             connection.login(myemail,app_password)
             connection.sendmail(from_addr=email,to_addrs=myemail,msg=f"Subject:Portfolio Email Message\n{message}")
