@@ -419,3 +419,8 @@ def about(request):
     year = date.today().year
     context={"year":year}
     return render(request,"store/about.html",context)
+
+def contact(request):
+    year = date.today().year
+    context = {"year": year}
+    return render(request,"store/contact.html",context)

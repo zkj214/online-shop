@@ -22,5 +22,6 @@ urlpatterns=[
     path("save_order/<int:pk>/",save_order,name="save_order"),
     path("cancel_order/<int:pk>/",cancel_order,name="cancel_order"),
     path("delete_order/<int:pk>/",delete_order,name="delete_order"),
-    path("about/",about,name="about")
+    path("about/",about,name="about"),
+    path("contact/",contact,name="contact")
 ]

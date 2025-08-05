@@ -33,7 +33,7 @@
           <a class="nav-link active" aria-current="page" href="{% url 'store:about' %}">About</a>
         </li>
           <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Contact</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'store:contact' %}">Contact</a>
         </li>
       {% endif %}
         {% if user.is_authenticated %}
