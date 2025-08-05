@@ -422,7 +422,6 @@ def about(request):
 def contact(request):
     year = date.today().year
     if request.method=="POST":
-        email=request.POST.get("email_address")
         message=request.POST.get("message")
         myemail="alhaj.ziebhar214@gmail.com"
         app_password="hwvs havt dtnh krqr "
@@ -430,7 +429,7 @@ def contact(request):
         with smtplib.SMTP("smtp.gmail.com",port=587) as connection:
             connection.starttls()
             connection.login(myemail,app_password)
-            connection.sendmail(from_addr=email,to_addrs=myemail,msg=f"Subject:Portfolio Email Message\n{message}")
+            connection.sendmail(from_addr=myemail,to_addrs=myemail,msg=f"Subject:Portfolio Email Message\n{message}")
 
         messages.info(request,"Your message has been sent.")
         return redirect("store:items")
