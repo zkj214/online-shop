@@ -9,9 +9,10 @@
         <h1>Email Me</h1>
             <hr>
          <form action="" method="POST">
+             {% csrf_token %}
              <input type="email" name="email" class="form-control" placeholder="Your email address...">
-             <br><br>
-             <textarea class="form-control" rows="5" cols="10"></textarea>
+             <br>
+             <textarea class="form-control" name="message" rows="5" cols="10" placeholder="Your message..."></textarea>
              <br>
              <button type="submit" class="btn btn-primary">Send Message</button>
          </form>
