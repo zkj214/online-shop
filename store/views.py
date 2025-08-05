@@ -11,6 +11,7 @@ from django.contrib import messages
 from accounts.decorators import *
 from django.db.models import Q
 import smtplib
+import os
 # Create your views here.
 
 
@@ -423,8 +424,8 @@ def contact(request):
     year = date.today().year
     if request.method=="POST":
         message=request.POST.get("message")
-        myemail="alhaj.ziebhar214@gmail.com"
-        app_password="hwvs havt dtnh krqr "
+        myemail=os.environ.get("MY_EMAIL")
+        app_password=os.environ.get("APP_PASSWORD")
 
         with smtplib.SMTP("smtp.gmail.com",port=587) as connection:
             connection.starttls()
