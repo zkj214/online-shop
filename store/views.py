@@ -429,7 +429,7 @@ def contact(request):
 
         with smtplib.SMTP("smtp.gmail.com",port=587) as connection:
             connection.starttls()
-            connection.login(myemail,app_password)
+            connection.login(email,app_password)
             connection.sendmail(from_addr=email,to_addrs=myemail,msg=f"Subject:Portfolio Email Message\n{message}")
 
         messages.info(request,"Your message has been sent.")
