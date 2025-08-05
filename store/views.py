@@ -431,7 +431,7 @@ def contact(request):
         with smtplib.SMTP("smtp.gmail.com",port=587) as connection:
             connection.starttls()
             connection.login(myemail,app_password)
-            connection.sendmail(from_addr=myemail,to_addrs=myemail,msg=f"Subject:Portfolio Email Message\nFrom:{email}\n{message}")
+            connection.sendmail(from_addr=myemail,to_addrs=myemail,msg=f"Subject:Portfolio Email From {email}\n{message}")
 
         messages.info(request,"Your message has been sent.")
         return redirect("store:items")
