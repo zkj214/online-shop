@@ -9,9 +9,8 @@ from decimal import Decimal   # convert to decimal type
 from django.core.paginator import Paginator
 from django.contrib import messages
 from accounts.decorators import *
-import os
-from django.conf import settings
 from django.db.models import Q
+import smtplib
 # Create your views here.
 
 
@@ -422,5 +421,19 @@ def about(request):
 
 def contact(request):
     year = date.today().year
+    if request.method=="POST":
+        email=request.POST.get("email")
+        message=request.POST.get("message")
+        myemail="alhaj.ziebhar214@gmail.com"
+        app_password="hwvs havt dtnh krqr "
+
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(myemail,app_password)
+            connection.sendmail(from_addr=email,to_addrs=myemail,msg=f"Subject:Portfolio Email Message\n{message}")
+
+        messages.info(request,"Your message has been sent.")
+        return redirect("store:items")
+
     context = {"year": year}
     return render(request,"store/contact.html",context)
