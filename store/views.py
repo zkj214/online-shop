@@ -422,7 +422,7 @@ def about(request):
 def contact(request):
     year = date.today().year
     if request.method=="POST":
-        email=request.POST.get("email")
+        email=request.POST.get("email_address")
         message=request.POST.get("message")
         myemail="alhaj.ziebhar214@gmail.com"
         app_password="hwvs havt dtnh krqr "
