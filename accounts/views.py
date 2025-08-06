@@ -1,13 +1,12 @@
 from django.shortcuts import render,redirect
 from datetime import date
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth import login,logout,authenticate,get_user_model
 from django.contrib import messages
 from accounts.decorators import authorized_user
 from accounts.forms import CreateUserForm, ImageUploadForm, RegisterCustomerForm
 from django.contrib.auth.models import Group
 from store.models import Customer, Order, CartItem
-from django.contrib.auth import get_user_model
 from accounts.forms import CustomerForm
 from django.conf import settings
 import os
