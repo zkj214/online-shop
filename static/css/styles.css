@@ -223,4 +223,8 @@ footer
     {
         padding-bottom:10px;!important;
     }
+	.email-field
+	{
+    width: 75%;
+	}
 }
