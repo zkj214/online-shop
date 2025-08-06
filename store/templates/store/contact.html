@@ -10,7 +10,7 @@
             <hr>
          <form action="{% url 'store:contact' %}" method="POST">
              {% csrf_token %}
-             <input type="email" name="email" class="form-control" placeholder="Email address..." required><br>
+             <input type="email" name="email" class="form-control email-field" placeholder="Email address..." required><br>
              <textarea class="form-control" name="message" rows="5" cols="10" placeholder="Your message..."required></textarea>
              <br>
              <button type="submit" class="btn btn-primary">Send Message</button>
