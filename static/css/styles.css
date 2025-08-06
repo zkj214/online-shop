@@ -181,6 +181,10 @@ footer
 	background: #7CD1C0;
 }
 
+.navbar
+    {
+        padding-bottom:0;!important;
+    }
 
 @media only screen and (max-width: 768px)
 {
